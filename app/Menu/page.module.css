@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fffdfd;
+}
+
+.box {
+  width: 600px;
+  height: 600px;
+  padding: 0px;
+  background-color: #fff;
+  border-radius: 10px;
+  transform: scale(1.2);
+  box-shadow: 0 9px 9px rgba(0, 32, 63, 0.45), 0 2px 5px rgba(0, 32, 63, 0.45);
+}
+
+.Title {
+  padding-top: 15px;
+  border-radius: 10px;
+  text-align: center;
+  width: 600px;
+  height: 80px;
+  color: white;
+  background-color: dodgerblue;
+}
+
+.ul {
+  width: 600px;
+  height: auto;
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.li {
+  border-radius: 20px;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 30px;
+  height: 80px;
+  transition: background-color 0.2s;
+  /* Smooth transition for the background color */
+}
+
+.li:hover {
+  transform: scale(1);
+  color: white;
+  background-color: dodgerblue;
+  /* Change background color on hover */
+}

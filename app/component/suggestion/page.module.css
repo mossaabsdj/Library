@@ -1,0 +1,50 @@
+/* components/ProductList.module.css */
+
+.ul {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  width: 500px;
+  position: absolute;
+  /* Makes the element float above other content */
+  z-index: 10;
+  max-height: 600px;
+  /* Fixed height for scroll */
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+  /* Optional: border around the list */
+  /* Ensures it is on top of other elements */
+}
+
+.li {
+  font-size: 18px;
+  padding: 20px;
+  display: flex;
+}
+
+.li:first-child {
+  font-size: larger;
+  background-color: dodgerblue;
+}
+
+.ul :hover {
+  background-color: dodgerblue;
+}
+
+.prix {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  /* Vertically center content */
+  padding: 10px;
+  /* Optional: Add padding if needed */
+}
+
+.Nom {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  /* Vertically center content */
+  padding: 10px;
+  /* Optional: Add padding if needed */
+}

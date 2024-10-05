@@ -1,0 +1,107 @@
+.All {
+  background-color: white;
+}
+
+.Between {
+  background-color: rgb(0, 0, 0);
+}
+
+@media screen {
+  .p {
+    visibility: hidden;
+  }
+}
+
+.Montant_Totatl {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.Last {
+  background-color: dodgerblue;
+}
+
+.Montant {
+  color: white;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.Table:last-child {
+  font-size: xx-large;
+}
+
+.Table {
+  margin: 20px;
+  margin-right: 20px;
+  max-width: 97%;
+  max-height: 600px;
+  /* Set your desired max height */
+  overflow-y: scroll;
+  /* Enable vertical scrolling if content exceeds height */
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 32, 63, 0.45), 0 2px 5px rgba(0, 32, 63, 0.45);
+}
+
+.Button_Delete {
+  background-color: dodgerblue;
+  cursor: pointer;
+}
+
+.Head {
+  background-color: dodgerblue;
+  padding: 0px;
+  height: 0px;
+}
+
+.Details {
+  letter-spacing: 2px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Helvetica", "Arial", sans-serif;
+  color: whitesmoke;
+}
+
+@media print {
+  .Button_Delete {
+    display: none;
+  }
+  .element {
+    display: none;
+  }
+  .print {
+    display: none;
+  }
+  .Table::-webkit-scrollbar {
+    display: none;
+  }
+  /* Firefox */
+  .Table {
+    scrollbar-width: none;
+    /* Hide scrollbar in Firefox */
+  }
+  /* Set the page size to A4 */
+  .Table {
+    overflow: visible;
+    display: block;
+    /* Ensure the table is displayed as a block */
+    margin: 0;
+    /* Remove margins */
+    padding: 0;
+    /* Remove padding if necessary */
+    width: 100%;
+    height: 1px;
+    /* Full width of the page */
+    /* Allow the height to adjust based on content */
+    font-size: 0.7em;
+    /* Reduce the font size for smaller display */
+    transform: scale(0.5);
+    /* Scale down the entire table (adjust this value as needed) */
+    transform-origin: top left;
+    /* Keep scaling from the top left corner */
+    /* Ensure borders collapse for better visibility */
+  }
+  .p {
+    visibility: visible;
+  }
+}

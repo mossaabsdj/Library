@@ -1,0 +1,40 @@
+@media print {
+  .body {
+    display: none;
+  }
+  #print {
+    display: none;
+  }
+  .SalesRapid {
+    display: none;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 390px;
+  /* Left takes remaining space, right is fixed */
+  /* Space between columns */
+}
+
+.SalesRapid {
+  /* Additional styling for Sales Rapid section */
+  background-color: white;
+  /* Optional: background color */
+  padding: 20px;
+  /* Optional: padding */
+  border-radius: 8px;
+  /* Optional: rounded corners */
+}
+
+.All {
+  background-color: white;
+  height: 900px;
+  /* Additional styling for All section */
+  background-color: #ffffff;
+  /* Optional: background color */
+  padding: 20px;
+  /* Optional: padding */
+  border-radius: 8px;
+  /* Optional: rounded corners */
+}

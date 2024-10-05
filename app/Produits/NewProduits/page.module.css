@@ -1,0 +1,45 @@
+.All {
+  background-color: white;
+}
+
+.New {
+  z-index: 1;
+  background-color: rgb(221, 231, 243);
+  border-radius: 20px;
+  position: absolute;
+  width: 950px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.AddButton {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.textfields {
+  padding: 20px;
+  padding-left: 10px;
+  padding-right: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0px;
+}
+
+.Code_Barres {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.autherFields {
+  width: max-content;
+  margin-right: 0px;
+  height: max-content;
+  margin-left: 0px;
+  display: flex;
+  flex-direction: row;
+}

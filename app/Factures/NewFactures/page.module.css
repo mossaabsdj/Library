@@ -1,0 +1,12 @@
+.All {
+  background-color: white;
+}
+
+@media print {
+  .body {
+    display: none;
+  }
+  #print {
+    display: none;
+  }
+}

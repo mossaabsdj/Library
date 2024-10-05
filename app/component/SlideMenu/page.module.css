@@ -1,0 +1,173 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@keyframes slide {
+  25% {
+    background-color: brown;
+    width: 25%;
+  }
+  50% {
+    width: 50%;
+  }
+  75% {
+    width: 75%;
+  }
+}
+
+.all {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  height: 100vh;
+  background: var(--body-color);
+}
+
+.close {
+  width: 90px;
+  opacity: 0 px;
+}
+
+.close text {
+  color: red;
+}
+
+.sidebar {
+  display: inline-block;
+  animation: slide 2s forwards;
+}
+
+.sidebar li {
+  height: 50px;
+  margin-top: 10px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.SearchBox {
+  background-color: var(--Primary-color-light);
+}
+
+.SearchBox input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--Primary-color-light);
+}
+
+.sidebar li i {
+  min-width: 60px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar li i,
+.sidebar li text {
+  color: var(--text-color);
+  transition: var(--tran-02);
+}
+
+.sidebar header {
+  position: relative;
+}
+
+.sidebar text {
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 250vh;
+  width: 250px;
+  padding: 10px 14px;
+  background-color: var(--sidebar-color);
+}
+
+.imagetext {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  width: 50px;
+  border-radius: 6px;
+}
+
+.Spanimage {
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.textheadertext {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.Profession {
+  margin-top: -2px;
+}
+
+.header i {
+  position: absolute;
+  top: 50px;
+  right: -25px;
+  transform: translateY(-50%);
+  height: 25px;
+  width: 25px;
+  background-color: var(--Primary-color);
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: var(--sidebar-color);
+  font-size: 22px;
+}
+
+.header i:hover {
+}
+
+.sidebar li a {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.sidebar li {
+  transition: var(--tran-04);
+}
+
+.sidebar li :hover {
+  background-color: var(--Primary-color);
+}
+
+.sidebar li a :hover text,
+.sidebar li a:hover i {
+  color: var(--sidebar-color);
+}
+
+.menubar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom {
+  margin-top: 90%;
+}
