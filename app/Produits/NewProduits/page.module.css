@@ -1,5 +1,12 @@
-.All {
-  background-color: white;
+.all {
+}
+
+.exit {
+  position: absolute;
+  z-index: 1000;
+  right: 0;
+  background-color: red;
+  color: white;
 }
 
 .New {
@@ -21,6 +28,7 @@
 }
 
 .textfields {
+  margin-top: 20px;
   padding: 20px;
   padding-left: 10px;
   padding-right: 0px;

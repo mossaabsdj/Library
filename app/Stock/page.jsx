@@ -1,5 +1,5 @@
 "use client";
-import TableItems from "@/app/component/TableItems/page";
+//import TableItems from "@/app/component/TableItems/page";
 import DataGrid from "@/app/component/DataGrid/DataGrid";
 
 function Stock() {

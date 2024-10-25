@@ -6,11 +6,14 @@ import style from "./page.module.css";
 import { useEffect, useRef, useState } from "react";
 import UpdatePage from "@/app/component/ConsulterSales/page";
 import Stats from "@/app/component/Stats/page";
+import { useRouter } from "next/navigation"; // Use the correct import
+
 function Sales() {
   const [ok, setok] = useState(false);
   const [Sales_ID, setSales_ID] = useState([]);
   const [Sales_ID_Update_Page, setSales_ID_Update_Page] = useState("");
   const [ClickUpdate, setClickUpdate] = useState(false);
+  const router = useRouter();
 
   async function Deletehistory(e) {
     const SalesProd_ID = e.target.id;
@@ -269,6 +272,10 @@ function Sales() {
       ],
     },
   ];
+  function Visible_NewSales() {
+    router.push("/Sales/NewSales");
+  }
+
   var Thead_History = ["Nom", "Prix_Vente", "Quantite"];
   function Display_Update() {
     setClickUpdate(false);
@@ -282,7 +289,7 @@ function Sales() {
         />
       ) : (
         <div className={style.All}>
-          <PageDjo title={title} />
+          <PageDjo title={title} visible={Visible_NewSales} />
           <div className={style.fact}>
             {" "}
             <CollapsibleTable

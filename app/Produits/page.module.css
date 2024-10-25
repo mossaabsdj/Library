@@ -1,4 +1,13 @@
 .All {
   background-color: white;
-  height: 900px;
+}
+
+.allBlur {
+  background-color: white;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* Set the height according to your layout */
+  filter: blur(5px);
+  /* Apply blur to the background image */
 }

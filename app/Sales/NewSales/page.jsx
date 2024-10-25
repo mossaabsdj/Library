@@ -253,18 +253,12 @@ function NewSels() {
       console.log("Enter key pressed");
     }
   };
-  function button_Delete() {
-    var Button_Delete = document.getElementsByName("Button_Delete");
-    console.log(Button_Delete);
-    Button_Delete.forEach((B) => {
-      B.onclick = function () {
-        setSales((prevSales) => {
-          const updatedSales = [...prevSales];
-          console.log("id" + B.id + "=====" + updatedSales);
-          updatedSales.splice(B.id, 1);
-          return updatedSales;
-        });
-      };
+  function button_Delete(id) {
+    setSales((prevSales) => {
+      const updatedSales = [...prevSales];
+      // console.log("id" + B.id + "=====" + updatedSales);
+      updatedSales.splice(id, 1);
+      return updatedSales;
     });
   }
   async function creatSales(Montant_Total) {
@@ -391,12 +385,7 @@ function NewSels() {
       });
     });
   }, [product]);
-  useEffect(() => {
-    console.log("Sales--" + JSON.stringify(Sales));
-    setTimeout(() => {
-      button_Delete();
-    }, 2000);
-  }, [Sales]);
+  useEffect(() => {}, [Sales]);
 
   var title = "New Sales";
   var Thead = ["Nom", "Prix_Vente", "Quantite", "Sum"];
@@ -439,7 +428,6 @@ function NewSels() {
               }}
             >
               <div onBlur={Display_Off} className={style.Sug}>
-                {" "}
                 <TextField
                   onKeyDown={Entre}
                   autoComplete="off"
@@ -485,7 +473,12 @@ function NewSels() {
           </div>
           <div id="print">
             {" "}
-            <FactTable ref={printRef} rowss={Sales} Thead={Thead} />
+            <FactTable
+              ref={printRef}
+              rowss={Sales}
+              Thead={Thead}
+              DeleteFunction={button_Delete}
+            />
           </div>
         </div>
         <div className={style.SalesRapid}>

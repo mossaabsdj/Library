@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"; // Use the correct import
 import DataGrid from "@/app/component/DataGrid/DataGrid";
 import { useEffect, useRef } from "react";
 
-function item({ title }) {
+function item({ title, visible }) {
   const router = useRouter();
   var button = useRef(null);
   const New = () => {
@@ -17,8 +17,12 @@ function item({ title }) {
       button.current.innerText = result;
       router.push(`/${result}`);
     } else if (!title.startsWith("New")) {
-      console.log("im here 2");
-      router.push(`${title}/New${title}`);
+      if (title.startsWith("Produits")) {
+        console.log("Produits");
+      } else {
+        // console.log("im here 2");
+        router.push(`${title}/New${title}`);
+      }
     }
   };
   const Home = () => {
@@ -38,7 +42,7 @@ function item({ title }) {
         <button className={style.backbutton} onClick={Home}>
           Home
         </button>
-        <button id="New" ref={button} className={style.a} onClick={New}>
+        <button id="New" ref={button} onClick={visible} className={style.a}>
           New {title}
         </button>
         <form className={style.form}>

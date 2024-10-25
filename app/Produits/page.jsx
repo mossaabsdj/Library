@@ -57,13 +57,13 @@ function item() {
           confirmButtonText: "Yes, delete it!",
         }).then((result) => {
           if (result.isConfirmed) {
-            console.log("ok" + ok + "+++" + Produit_ID);
+            // console.log("ok" + ok + "+++" + Produit_ID);
 
             setok(true);
-            console.log("ok" + ok + "+++" + Produit_ID);
+            // console.log("ok" + ok + "+++" + Produit_ID);
 
             setProduit_ID(params.row.Produit_ID);
-            console.log("ok" + ok + "+++" + Produit_ID);
+            //  console.log("ok" + ok + "+++" + Produit_ID);
             Swal.fire({
               title: "Loading...",
               html: "Please wait while we process your request.",
@@ -312,12 +312,6 @@ function item() {
   }, [Produit_ID]);
   useEffect(() => {
     fetchProducts().then(setProducts).catch(console.error);
-    setTimeout(() => {
-      var NewButton = document.getElementById("New");
-      NewButton.onclick = function () {
-        setNewProduitVisible(true);
-      };
-    }, 1000);
 
     setloading(false);
   }, []);
@@ -329,30 +323,38 @@ function item() {
       setrows(products);
     }
   }, [products]);
-
+  function visible_NewProduit() {
+    setNewProduitVisible(true);
+  }
+  function visible_NewProduit_off() {
+    setNewProduitVisible(false);
+  }
   return (
-    <div className={style.All}>
-      <PageDjo title={title} />
-      {ModifyVisible && (
-        <Modify Values={Values} displayfunction={DisplayModify} />
-      )}
-      {NewProduitVisible && <NewProduit />}
-      {loading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "50vh", // Full viewport height
-          }}
-        >
-          {" "}
-          <CircularProgressWithLabel />
-        </div>
-      ) : (
-        <DataGrid columnss={columnss} rows={rows} />
-      )}
-    </div>
+    <>
+      {" "}
+      <div className={NewProduitVisible ? style.allBlur : style.all}>
+        <PageDjo title={title} visible={visible_NewProduit} />
+        {ModifyVisible && (
+          <Modify Values={Values} displayfunction={DisplayModify} />
+        )}
+        {loading ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50vh", // Full viewport height
+            }}
+          >
+            {" "}
+            <CircularProgressWithLabel />
+          </div>
+        ) : (
+          <DataGrid columnss={columnss} rows={rows} />
+        )}
+      </div>
+      {NewProduitVisible && <NewProduit Visibleoff={visible_NewProduit_off} />}
+    </>
   );
 }
 export default item;

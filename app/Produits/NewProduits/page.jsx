@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 import style from "@/app/Produits/NewProduits/page.module.css";
 import { display } from "@mui/system";
 
-function NewProduits() {
+function NewProduits({ Visibleoff }) {
   const [alert, setAlert] = useState({ message: "", severity: "" });
   const [ok, setok] = useState(false);
   const [products, setProducts] = useState([]);
@@ -222,6 +222,9 @@ function NewProduits() {
         </div>
       )}
       <div className={style.New}>
+        <Button onClick={Visibleoff} className={style.exit}>
+          X
+        </Button>
         <Box className={style.textfields}>
           <Box className={style.Code_Barres}>
             {" "}

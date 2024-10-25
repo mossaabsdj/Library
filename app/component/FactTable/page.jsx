@@ -22,7 +22,7 @@ function subtotal(items) {
   return items.map(({ Sum }) => Sum).reduce((sum, i) => sum + i, 0);
 }
 
-export default function SpanningTable({ rowss, Thead }) {
+export default function SpanningTable({ rowss, Thead, DeleteFunction }) {
   const t = useRef(null);
   rowss.map((object) => {
     if (object.Prix_Achat) {
@@ -148,6 +148,7 @@ export default function SpanningTable({ rowss, Thead }) {
                     id={N} // Ensure ID is unique and properly formatted
                     name="Button_Delete"
                     variant="contained"
+                    onClick={() => DeleteFunction(N)}
                   >
                     Delete
                   </Button>

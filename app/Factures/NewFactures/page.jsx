@@ -2,7 +2,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Swal from "sweetalert2";
-
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import ProductList from "@/app/component/suggestion/page";
@@ -103,18 +102,14 @@ function NewFacture() {
       setAlert({ message: "", severity: "" });
     }, 500);
   };
-  function button_Delete() {
-    var Button_Delete = document.getElementsByName("Button_Delete");
-    Button_Delete.forEach((B) => {
-      B.onclick = function () {
-        setFactures((prevFactures) => {
-          const updatedFactures = [...prevFactures];
-          updatedFactures.splice(B.id, 1);
-          return updatedFactures;
-        });
-      };
+  function button_Delete(id) {
+    setFactures((prevFactures) => {
+      const updatedFactures = [...prevFactures];
+      updatedFactures.splice(id, 1);
+      return updatedFactures;
     });
   }
+
   async function fetchProdact(Code_Barre) {
     try {
       const response = await fetch(
@@ -282,13 +277,7 @@ function NewFacture() {
     );
     setproduct(newproduct);
   }
-  useEffect(() => {
-    setTimeout(() => {
-      button_Delete();
-    }, 1000);
-
-    console.log("Factures--" + JSON.stringify(Factures));
-  }, [Factures]);
+  useEffect(() => {}, [Factures]);
   useEffect(() => {
     const listItems = document.querySelectorAll("#myList li");
     //  var textfield = document.getElementById("");
@@ -393,7 +382,11 @@ function NewFacture() {
         </Box>
       </div>
       <div id="print">
-        <FactTable rowss={Factures} Thead={Thead} />
+        <FactTable
+          rowss={Factures}
+          Thead={Thead}
+          DeleteFunction={button_Delete}
+        />
       </div>
     </div>
   );
