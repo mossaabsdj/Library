@@ -9,12 +9,18 @@ export async function GET(request: NextRequest) {
     const customerId = searchParams.get("customerId")
       ? parseInt(searchParams.get("customerId")!, 10)
       : undefined;
+    const search = searchParams.get("search") || undefined;
+    const status = searchParams.get("status") || undefined;
+    const paymentMethod = searchParams.get("paymentMethod") || undefined;
     const startDate = searchParams.get("startDate") || undefined;
     const endDate = searchParams.get("endDate") || undefined;
 
     const data = await SaleService.getSales({
       page,
       limit,
+      search,
+      status,
+      paymentMethod,
       customerId,
       startDate,
       endDate,

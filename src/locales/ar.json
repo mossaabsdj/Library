@@ -578,5 +578,88 @@
   "sidebar": {
     "appSubtitle": "الكاونتر والمخزون",
     "dbConnected": "متصل بـ Prisma / MySQL"
+  },
+  "sales": {
+    "title": "إدارة المبيعات والفواتير",
+    "subtitle": "عرض، تصفية، إعادة طباعة وإدارة جميع وصولات ومبيعات المتجر",
+    "kpi": {
+      "totalCount": "إجمالي المبيعات",
+      "revenue": "إجمالي الإيرادات",
+      "collected": "المبلغ المحصل",
+      "credit": "ديون العملاء (المتبقي)"
+    },
+    "filters": {
+      "searchPlaceholder": "بحث برقم الوصل، العميل، أمين الصندوق، ملاحظة...",
+      "allStatus": "جميع الحالات",
+      "completed": "مكتمل",
+      "returned": "مسترجع",
+      "held": "معلق",
+      "allPaymentMethods": "جميع طرق الدفع",
+      "cash": "نقداً",
+      "card": "بطاقة",
+      "creditPay": "بالأجل (دين)",
+      "allCustomers": "جميع العملاء",
+      "today": "اليوم",
+      "yesterday": "أمس",
+      "thisMonth": "هذا الشهر",
+      "allTime": "الكل",
+      "startDate": "تاريخ البداية",
+      "endDate": "تاريخ النهاية",
+      "reset": "إعادة ضبط"
+    },
+    "table": {
+      "dateTime": "التاريخ والوقت",
+      "invoice": "رقم الوصل / الفاتورة",
+      "customer": "العميل",
+      "walkInCustomer": "زبون عادي",
+      "items": "السلع",
+      "method": "طريقة الدفع",
+      "total": "الإجمالي",
+      "paid": "المدفوع",
+      "remaining": "المتبقي (دين)",
+      "status": "الحالة",
+      "actions": "الإجراءات",
+      "noSales": "لم يتم العثور على مبيعات.",
+      "viewDetails": "عرض التفاصيل",
+      "printReceipt": "إعادة طباعة الوصل",
+      "editSale": "تعديل البيع",
+      "showing": "عرض"
+    },
+    "details": {
+      "title": "تفاصيل البيع",
+      "ticketInfo": "بيانات الوصل",
+      "cashier": "أمين الصندوق",
+      "date": "تاريخ الإصدار",
+      "itemsList": "السلع المشتراة",
+      "product": "المنتج",
+      "barcode": "الباركود",
+      "unitPrice": "سعر الوحدة",
+      "quantity": "الكمية",
+      "discount": "الخصم",
+      "subtotal": "المجموع الجزئي",
+      "subtotalLabel": "المجموع الفرعي",
+      "globalDiscount": "الخصم الإجمالي",
+      "netTotal": "الإجمالي الصافي",
+      "amountPaid": "المبلغ المدفوع",
+      "balanceDue": "المتبقي للدفع (دين)",
+      "paymentsHistory": "سجل الدفعات",
+      "noPayments": "لا توجد دفعات إضافية مسجلة.",
+      "notes": "ملاحظات",
+      "noNotes": "لا توجد ملاحظات لهذه العملية.",
+      "printButton": "طباعة الوصل",
+      "editButton": "تعديل البيع",
+      "close": "إغلاق"
+    },
+    "update": {
+      "title": "تعديل العملية",
+      "customerSelect": "العميل المرتبط",
+      "notesLabel": "ملاحظات / تعليقات",
+      "notesPlaceholder": "أضف ملاحظات حول هذه البيعة...",
+      "settleDebt": "تسديد المتبقي",
+      "settleAmount": "المبلغ المدفوع",
+      "saveButton": "حفظ التعديلات",
+      "saveSuccess": "تم تحديث عملية البيع بنجاح.",
+      "paymentSuccess": "تم تسجيل الدفعة بنجاح."
+    }
   }
 }

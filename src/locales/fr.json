@@ -578,5 +578,88 @@
   "sidebar": {
     "appSubtitle": "Comptoir & Stock",
     "dbConnected": "Prisma / MySQL Connecté"
+  },
+  "sales": {
+    "title": "Gestion des Ventes & Factures",
+    "subtitle": "Consultez, filtrez, réimprimez et gérez l'ensemble des tickets et ventes du magasin",
+    "kpi": {
+      "totalCount": "Total Ventes",
+      "revenue": "Chiffre d'Affaires",
+      "collected": "Montant Encaissé",
+      "credit": "Crédit Client (Reste)"
+    },
+    "filters": {
+      "searchPlaceholder": "Rechercher par N° ticket, client, caissier, note...",
+      "allStatus": "Tous les statuts",
+      "completed": "Complété",
+      "returned": "Retourné",
+      "held": "En attente",
+      "allPaymentMethods": "Tous les modes",
+      "cash": "Espèces",
+      "card": "Carte",
+      "creditPay": "À Crédit",
+      "allCustomers": "Tous les clients",
+      "today": "Aujourd'hui",
+      "yesterday": "Hier",
+      "thisMonth": "Ce mois",
+      "allTime": "Tout",
+      "startDate": "Date début",
+      "endDate": "Date fin",
+      "reset": "Réinitialiser"
+    },
+    "table": {
+      "dateTime": "Date & Heure",
+      "invoice": "N° Ticket / Facture",
+      "customer": "Client",
+      "walkInCustomer": "Client Comptoir",
+      "items": "Articles",
+      "method": "Mode",
+      "total": "Total",
+      "paid": "Payé",
+      "remaining": "Reste (Crédit)",
+      "status": "Statut",
+      "actions": "Actions",
+      "noSales": "Aucune vente trouvée.",
+      "viewDetails": "Voir les détails",
+      "printReceipt": "Réimprimer le ticket",
+      "editSale": "Modifier la vente",
+      "showing": "Affichage de"
+    },
+    "details": {
+      "title": "Détails de la Vente",
+      "ticketInfo": "Informations du Ticket",
+      "cashier": "Caissier",
+      "date": "Date d'émission",
+      "itemsList": "Articles Achetés",
+      "product": "Produit",
+      "barcode": "Code-barres",
+      "unitPrice": "Prix Unit.",
+      "quantity": "Quantité",
+      "discount": "Remise",
+      "subtotal": "Sous-total",
+      "subtotalLabel": "Sous-total brut",
+      "globalDiscount": "Remise globale",
+      "netTotal": "Total Net",
+      "amountPaid": "Montant Payé",
+      "balanceDue": "Reste à payer (Dette)",
+      "paymentsHistory": "Historique des Règlements",
+      "noPayments": "Aucun règlement supplémentaire enregistré.",
+      "notes": "Notes / Remarques",
+      "noNotes": "Aucune note pour cette vente.",
+      "printButton": "Imprimer Ticket",
+      "editButton": "Modifier Vente",
+      "close": "Fermer"
+    },
+    "update": {
+      "title": "Modifier la Vente",
+      "customerSelect": "Client associé",
+      "notesLabel": "Notes / Observations",
+      "notesPlaceholder": "Ajouter des remarques sur cette vente...",
+      "settleDebt": "Régler le solde restant",
+      "settleAmount": "Montant à verser",
+      "saveButton": "Enregistrer les modifications",
+      "saveSuccess": "Vente mise à jour avec succès.",
+      "paymentSuccess": "Règlement enregistré avec succès."
+    }
   }
 }

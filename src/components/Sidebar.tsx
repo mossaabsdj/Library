@@ -7,6 +7,7 @@ import { useI18n } from "@/contexts/I18nContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
   ShoppingCart,
+  ReceiptText,
   Package,
   Layers,
   Truck,
@@ -32,6 +33,11 @@ export function Sidebar() {
       icon: ShoppingCart,
       isPos: true,
       shortcut: "F1",
+    },
+    {
+      href: "/sales",
+      label: t("app.sales", "Ventes & Factures"),
+      icon: ReceiptText,
     },
     {
       href: "/products",

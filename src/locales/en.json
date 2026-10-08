@@ -578,5 +578,88 @@
   "sidebar": {
     "appSubtitle": "Counter & Inventory",
     "dbConnected": "Prisma / MySQL Connected"
+  },
+  "sales": {
+    "title": "Sales & Invoices Management",
+    "subtitle": "View, filter, reprint, and manage all store tickets and sales",
+    "kpi": {
+      "totalCount": "Total Sales",
+      "revenue": "Total Revenue",
+      "collected": "Collected Amount",
+      "credit": "Customer Credit (Balance)"
+    },
+    "filters": {
+      "searchPlaceholder": "Search by ticket N°, customer, cashier, note...",
+      "allStatus": "All statuses",
+      "completed": "Completed",
+      "returned": "Returned",
+      "held": "Held",
+      "allPaymentMethods": "All methods",
+      "cash": "Cash",
+      "card": "Card",
+      "creditPay": "On Credit",
+      "allCustomers": "All customers",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "thisMonth": "This month",
+      "allTime": "All",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "reset": "Reset"
+    },
+    "table": {
+      "dateTime": "Date & Time",
+      "invoice": "Ticket / Invoice N°",
+      "customer": "Customer",
+      "walkInCustomer": "Walk-in Customer",
+      "items": "Items",
+      "method": "Method",
+      "total": "Total",
+      "paid": "Paid",
+      "remaining": "Remaining (Credit)",
+      "status": "Status",
+      "actions": "Actions",
+      "noSales": "No sales found.",
+      "viewDetails": "View details",
+      "printReceipt": "Reprint receipt",
+      "editSale": "Edit sale",
+      "showing": "Showing"
+    },
+    "details": {
+      "title": "Sale Details",
+      "ticketInfo": "Ticket Information",
+      "cashier": "Cashier",
+      "date": "Issue Date",
+      "itemsList": "Purchased Items",
+      "product": "Product",
+      "barcode": "Barcode",
+      "unitPrice": "Unit Price",
+      "quantity": "Quantity",
+      "discount": "Discount",
+      "subtotal": "Subtotal",
+      "subtotalLabel": "Gross Subtotal",
+      "globalDiscount": "Global Discount",
+      "netTotal": "Net Total",
+      "amountPaid": "Amount Paid",
+      "balanceDue": "Balance Due (Debt)",
+      "paymentsHistory": "Payments History",
+      "noPayments": "No additional payments recorded.",
+      "notes": "Notes / Remarks",
+      "noNotes": "No notes for this sale.",
+      "printButton": "Print Ticket",
+      "editButton": "Edit Sale",
+      "close": "Close"
+    },
+    "update": {
+      "title": "Edit Sale",
+      "customerSelect": "Associated Customer",
+      "notesLabel": "Notes / Observations",
+      "notesPlaceholder": "Add remarks about this sale...",
+      "settleDebt": "Settle remaining balance",
+      "settleAmount": "Amount to pay",
+      "saveButton": "Save changes",
+      "saveSuccess": "Sale updated successfully.",
+      "paymentSuccess": "Payment recorded successfully."
+    }
   }
 }

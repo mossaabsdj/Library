@@ -217,11 +217,14 @@ export class SaleService {
   }
 
   /**
-   * Query sales history with pagination
+   * Query sales history with advanced filters, search, pagination, and KPI aggregates
    */
   static async getSales(params: {
     page?: number;
     limit?: number;
+    search?: string;
+    status?: string;
+    paymentMethod?: string;
     customerId?: number;
     startDate?: string;
     endDate?: string;
@@ -231,14 +234,43 @@ export class SaleService {
     const skip = (page - 1) * limit;
 
     const where: any = {};
-    if (params.customerId) where.customerId = params.customerId;
-    if (params.startDate || params.endDate) {
-      where.date = {};
-      if (params.startDate) where.date.gte = new Date(params.startDate);
-      if (params.endDate) where.date.lte = new Date(params.endDate);
+
+    if (params.customerId) {
+      where.customerId = params.customerId;
     }
 
-    const [sales, total] = await Promise.all([
+    if (params.status && params.status !== "ALL") {
+      where.status = params.status;
+    }
+
+    if (params.paymentMethod && params.paymentMethod !== "ALL") {
+      where.paymentMethod = params.paymentMethod;
+    }
+
+    if (params.startDate || params.endDate) {
+      where.date = {};
+      if (params.startDate) {
+        where.date.gte = new Date(params.startDate);
+      }
+      if (params.endDate) {
+        const end = new Date(params.endDate);
+        end.setHours(23, 59, 59, 999);
+        where.date.lte = end;
+      }
+    }
+
+    if (params.search && params.search.trim()) {
+      const q = params.search.trim();
+      where.OR = [
+        { invoiceNumber: { contains: q } },
+        { cashierName: { contains: q } },
+        { notes: { contains: q } },
+        { customer: { fullName: { contains: q } } },
+        { customer: { phone: { contains: q } } },
+      ];
+    }
+
+    const [sales, total, aggregates] = await Promise.all([
       prisma.sale.findMany({
         where,
         orderBy: { createdAt: "desc" },
@@ -249,12 +281,189 @@ export class SaleService {
             include: { product: true },
           },
           customer: true,
-          payments: true,
+          payments: {
+            orderBy: { createdAt: "desc" },
+          },
         },
       }),
       prisma.sale.count({ where }),
+      prisma.sale.aggregate({
+        where,
+        _sum: {
+          totalAmount: true,
+          discountAmount: true,
+          taxAmount: true,
+          finalAmount: true,
+          paidAmount: true,
+          remainingAmount: true,
+        },
+        _count: {
+          id: true,
+        },
+      }),
     ]);
 
-    return { sales, total, page, totalPages: Math.ceil(total / limit) };
+    return {
+      sales,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+      aggregates: {
+        totalRevenue: Number(aggregates._sum.finalAmount || 0),
+        totalPaid: Number(aggregates._sum.paidAmount || 0),
+        totalRemaining: Number(aggregates._sum.remainingAmount || 0),
+        totalCount: aggregates._count.id || total,
+      },
+    };
+  }
+
+  /**
+   * Get single sale by ID with full item relations, customer, and payments
+   */
+  static async getById(id: number) {
+    return prisma.sale.findUnique({
+      where: { id },
+      include: {
+        items: {
+          include: { product: true },
+        },
+        customer: true,
+        payments: {
+          orderBy: { createdAt: "desc" },
+        },
+      },
+    });
+  }
+
+  /**
+   * Update sale attributes (notes, customer assignment, status)
+   * If customer changes and sale has remaining credit, debt balance is atomically transferred
+   */
+  static async updateSale(
+    id: number,
+    data: {
+      customerId?: number | null;
+      notes?: string | null;
+      status?: string;
+      cashierName?: string;
+    },
+  ) {
+    return prisma.$transaction(async (tx) => {
+      const existing = await tx.sale.findUnique({
+        where: { id },
+      });
+      if (!existing) throw new Error("Vente introuvable");
+
+      const remaining = Number(existing.remainingAmount);
+
+      // If customer changed and there is remaining debt, transfer the credit balance from old to new customer
+      if (
+        data.customerId !== undefined &&
+        data.customerId !== existing.customerId &&
+        remaining > 0
+      ) {
+        if (existing.customerId) {
+          await tx.customer.update({
+            where: { id: existing.customerId },
+            data: { credit: { decrement: remaining } },
+          });
+        }
+        if (data.customerId) {
+          await tx.customer.update({
+            where: { id: data.customerId },
+            data: { credit: { increment: remaining } },
+          });
+        }
+      }
+
+      const updated = await tx.sale.update({
+        where: { id },
+        data: {
+          ...(data.customerId !== undefined && { customerId: data.customerId }),
+          ...(data.notes !== undefined && { notes: data.notes }),
+          ...(data.status !== undefined && { status: data.status }),
+          ...(data.cashierName !== undefined && {
+            cashierName: data.cashierName,
+          }),
+        },
+        include: {
+          items: {
+            include: { product: true },
+          },
+          customer: true,
+          payments: {
+            orderBy: { createdAt: "desc" },
+          },
+        },
+      });
+
+      return updated;
+    });
+  }
+
+  /**
+   * Record payment directly towards a sale's remaining credit
+   */
+  static async recordSalePayment(
+    saleId: number,
+    data: {
+      amount: number;
+      paymentMethod?: string;
+      notes?: string;
+    },
+  ) {
+    return prisma.$transaction(async (tx) => {
+      const sale = await tx.sale.findUnique({
+        where: { id: saleId },
+      });
+      if (!sale) throw new Error("Vente introuvable");
+
+      const currentRemaining = Number(sale.remainingAmount);
+      if (currentRemaining <= 0) {
+        throw new Error("Cette vente est déjà entièrement réglée.");
+      }
+
+      const paymentAmount = Math.min(data.amount, currentRemaining);
+      const newRemaining = currentRemaining - paymentAmount;
+      const newPaid = Number(sale.paidAmount) + paymentAmount;
+
+      // 1. Create Payment record
+      const payment = await tx.payment.create({
+        data: {
+          type: "SALE_PAYMENT",
+          amount: paymentAmount,
+          paymentMethod: data.paymentMethod || "CASH",
+          saleId: sale.id,
+          customerId: sale.customerId || null,
+          notes: data.notes || `Règlement pour ${sale.invoiceNumber}`,
+        },
+      });
+
+      // 2. Decrement customer debt if customer exists
+      if (sale.customerId) {
+        await tx.customer.update({
+          where: { id: sale.customerId },
+          data: { credit: { decrement: paymentAmount } },
+        });
+      }
+
+      // 3. Update Sale paid and remaining amounts
+      const updatedSale = await tx.sale.update({
+        where: { id: saleId },
+        data: {
+          paidAmount: newPaid,
+          remainingAmount: newRemaining,
+        },
+        include: {
+          items: { include: { product: true } },
+          customer: true,
+          payments: {
+            orderBy: { createdAt: "desc" },
+          },
+        },
+      });
+
+      return { payment, sale: updatedSale };
+    });
   }
 }

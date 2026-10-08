@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { usePos } from "./posState";
 import { useI18n } from "@/contexts/I18nContext";
 import { formatCurrency } from "@/lib/utils";
@@ -41,11 +42,43 @@ export function PosCart({
     setGlobalDiscount,
     totalItemsCount,
     heldSales,
+    activeTicketId,
   } = usePos();
   const { t } = useI18n();
 
   const [editingDiscount, setEditingDiscount] = useState(false);
   const [discountVal, setDiscountVal] = useState(String(globalDiscount));
+
+  const cartListRef = useRef<HTMLDivElement>(null);
+  const itemsEndRef = useRef<HTMLDivElement>(null);
+  const prevItemsCountRef = useRef(totalItemsCount);
+  const prevTicketIdRef = useRef(activeTicketId);
+
+  // Automatically scroll down in the receipt/cart when a new product is added
+  useEffect(() => {
+    // If user switched active ticket tab, sync without auto-scrolling
+    if (prevTicketIdRef.current !== activeTicketId) {
+      prevTicketIdRef.current = activeTicketId;
+      prevItemsCountRef.current = totalItemsCount;
+      return;
+    }
+
+    if (totalItemsCount > prevItemsCountRef.current) {
+      // Small timeout ensures DOM elements have rendered before scrolling
+      const timer = setTimeout(() => {
+        if (cartListRef.current) {
+          cartListRef.current.scrollTo({
+            top: cartListRef.current.scrollHeight,
+            behavior: "smooth",
+          });
+        }
+        itemsEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+
+      return () => clearTimeout(timer);
+    }
+    prevItemsCountRef.current = totalItemsCount;
+  }, [totalItemsCount, activeTicketId]);
 
   const handleApplyDiscount = () => {
     const num = parseFloat(discountVal) || 0;
@@ -108,6 +141,10 @@ export function PosCart({
 
       {/* Cart Line Items List */}
       <div className="flex-1 overflow-y-auto p-2.5 space-y-1.5 bg-background/50">
+      <div
+        ref={cartListRef}
+        className="flex-1 overflow-y-auto p-2.5 space-y-1.5 bg-background/50 scroll-smooth"
+      >
         {cart.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center text-center p-6 text-muted-foreground">
             <ShoppingCart className="h-12 w-12 stroke-[1.2] mb-3 text-muted-foreground/40" />
@@ -192,6 +229,7 @@ export function PosCart({
             </div>
           ))
         )}
+        <div ref={itemsEndRef} />
       </div>
 
       {/* Cart Summary & Actions Footer */}
